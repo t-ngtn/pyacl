@@ -4,16 +4,16 @@ class UnionFind:
         self.root = [-1] * (n + 1)
         self.rnk = [0] * (n + 1)
 
-    def Find_Root(self, x):
+    def find_root(self, x):
         if self.root[x] < 0:
             return x
         else:
-            self.root[x] = self.Find_Root(self.root[x])
+            self.root[x] = self.find_root(self.root[x])
             return self.root[x]
 
-    def Unite(self, x, y):
-        x = self.Find_Root(x)
-        y = self.Find_Root(y)
+    def unite(self, x, y):
+        x = self.find_root(x)
+        y = self.find_root(y)
         if x == y:
             return
         elif self.rnk[x] > self.rnk[y]:
@@ -25,8 +25,8 @@ class UnionFind:
             if self.rnk[x] == self.rnk[y]:
                 self.rnk[y] += 1
 
-    def isSameGroup(self, x, y):
-        return self.Find_Root(x) == self.Find_Root(y)
+    def is_same_group(self, x, y):
+        return self.find_root(x) == self.find_root(y)
 
-    def Count(self, x):
-        return -self.root[self.Find_Root(x)]
+    def count(self, x):
+        return -self.root[self.find_root(x)]
